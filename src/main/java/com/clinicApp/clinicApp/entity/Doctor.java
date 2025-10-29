@@ -35,7 +35,7 @@ public class Doctor {
     private String specialization;
 
     @Column(name = "стаж")
-    private int specializations;
+    private int experienceYears;
 
     @Column
     private String email;
