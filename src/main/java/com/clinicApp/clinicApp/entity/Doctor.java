@@ -9,20 +9,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+
 import java.util.List;
-import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Пациенты")
+@Table(name = "Врачи")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Patient {
+public class Doctor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "имя")
@@ -31,33 +31,30 @@ public class Patient {
     @Column(name = "фамилия")
     private String lastName;
 
-    @Column(unique = true)
+    @Column(name = "специальность")
+    private String specialization;
+
+    @Column(name = "стаж")
+    private int specializations;
+
+    @Column
     private String email;
 
-    @Column(name = "телефон")
-    private int phoneNumber;
-
-    @Column(name = "дата рождения")
-    private LocalDate birthData;
-
-    @OneToMany(mappedBy = "patient_id")
+    @OneToMany(mappedBy = "doctor_id")
     @JsonIgnore
     private List<Appointment> appointmentList;
-
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Specialization specialization_id;
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Patient patient = (Patient) o;
-        return Objects.equals(email, patient.email);
+        Doctor doctor = (Doctor) o;
+        return Objects.equals(email, doctor.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(email);
+        return Objects.hash(email);
     }
 }
+
