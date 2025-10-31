@@ -27,9 +27,9 @@ public class Specialization {
     @Column(name = "описание")
     private String description;
 
-    @OneToMany(mappedBy = "specialization_id")
+    @OneToMany(mappedBy = "specializations")
     @JsonIgnore
-    private List<Patient> patientList;
+    private List<Doctor> Doctor;
 
     @Override
     public boolean equals(Object o) {

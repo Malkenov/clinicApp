@@ -17,5 +17,5 @@ public class DoctorResponseDto {
     private String description;
     private int experienceYears;
     private String email;
-    private List<AppendableRespunseDto> appendables;
+    private List<AppointmentResponseDto> appointment;
 }

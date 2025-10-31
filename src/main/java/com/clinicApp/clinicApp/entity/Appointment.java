@@ -28,7 +28,6 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.LAZY)
     private Patient patient_id;
 
-
     @Column
     private LocalDateTime dateTime;
 

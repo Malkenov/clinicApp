@@ -44,9 +44,6 @@ public class Patient {
     @JsonIgnore
     private List<Appointment> appointmentList;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Specialization specialization_id;
-
 
     @Override
     public boolean equals(Object o) {
