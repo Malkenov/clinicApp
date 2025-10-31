@@ -13,13 +13,13 @@ import java.time.LocalDateTime;
 @Builder
 public class AppointmentRequestDto {
 
-    @NotBlank(message = "Введите к какому врачу хотите записаться!")
-    private String doctor;
+    @NotNull(message = "Введите к какому врачу хотите записаться!")
+    private Long doctorId;
 
-    @NotBlank(message = "Введите данные пациенита!")
-    private String patient;
+    @NotNull(message = "Введите данные пациенита!")
+    private Long patientId;
 
     @NotNull
-    private LocalDateTime dataTime;
+    private LocalDateTime dateTime;
 
 }
