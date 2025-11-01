@@ -31,7 +31,7 @@ public class PatientService {
     private final AppointmentRepository appointmentRepository;
 
 
-    public PatientResponseDto postPatient(PatientRequestDto dto,Long id){
+    public PatientResponseDto postPatientAppointment(PatientRequestDto dto,Long id){
         Patient patient = PatientMapper.toEntity(dto);
 
         Doctor doctor = doctorRepository.findById(id)
@@ -47,4 +47,22 @@ public class PatientService {
     }
 
 
+    public PatientResponseDto postPatient(PatientRequestDto dto){
+        Patient patient = PatientMapper.toEntity(dto);
+        patientRepository.save(patient);
+        return PatientMapper.toDto(patient);
+    }
+
+    public List<PatientResponseDto> getByAll(){
+        return patientRepository.findAll()
+                .stream()
+                .map(PatientMapper::toDto)
+                .toList();
+    }
+
+    public PatientResponseDto getByLastName(PatientRequestDto dto){
+        Patient patient = patientRepository.findByLastName(dto.getLastName())
+                .orElseThrow(() -> new BadRequestException("Пациент с фамилией " + dto.getLastName() + " не найден!"));
+        return PatientMapper.toDto(patient);
+    }
 }
