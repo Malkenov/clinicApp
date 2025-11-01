@@ -30,8 +30,6 @@ public class PatientRequestDto {
     @NotNull(message = "дата рождение обязательно!")
     private LocalDate birthData;
 
-    @NotBlank(message = "Выберите специалиста!")
-    private String specializationName;
 
 
 
