@@ -20,8 +20,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
+
 import java.util.List;
 
 @AllArgsConstructor
@@ -34,7 +33,7 @@ public class PatientService {
     private final AppointmentRepository appointmentRepository;
 
 
-    public PatientResponseDto postPatientAppointment(PatientRequestDto dto,Long id){
+    public PatientResponseDto postPatientAppointment(PatientRequestDto dto, Long id) {
         Patient patient = PatientMapper.toEntity(dto);
 
         Doctor doctor = doctorRepository.findById(id)
@@ -46,35 +45,42 @@ public class PatientService {
         appointment.setDateTime(LocalDateTime.now());
         appointmentRepository.save(appointment);
 
-      return PatientMapper.toResponseDto(patient, List.of(appointment));
+        return PatientMapper.toResponseDto(patient, List.of(appointment));
     }
 
 
-    public PatientResponseDto postPatient(PatientRequestDto dto){
+    public PatientResponseDto postPatient(PatientRequestDto dto) {
         Patient patient = PatientMapper.toEntity(dto);
         patientRepository.save(patient);
         return PatientMapper.toDto(patient);
     }
 
-    public List<PatientResponseDto> getByAll(){
+    public List<PatientResponseDto> getByAll() {
         return patientRepository.findAll()
                 .stream()
                 .map(PatientMapper::toDto)
                 .toList();
     }
 
-    public PatientResponseDto getByLastName(PatientRequestDto dto){
+    public PatientResponseDto getByLastName(PatientRequestDto dto) {
         Patient patient = patientRepository.findByLastName(dto.getLastName())
                 .orElseThrow(() -> new BadRequestException("Пациент с фамилией " + dto.getLastName() + " не найден!"));
         return PatientMapper.toDto(patient);
     }
 
-    public PatientResponseDto updatePatient(PatientRequestDto dto){
+    public PatientResponseDto updatePatient(PatientRequestDto dto) {
         Patient patient = patientRepository.findByLastName(dto.getLastName())
                 .orElseThrow(() -> new BadRequestException("Пациент с фамилией " + dto.getLastName() + " не найден!"));
 
-        BeanUtils.copyProperties(dto,patient, BeanUtilsHelper.getNullPropertyNames(dto));
+        BeanUtils.copyProperties(dto, patient, BeanUtilsHelper.getNullPropertyNames(dto));
         patientRepository.save(patient);
         return PatientMapper.toDto(patient);
+    }
+
+    public void removePatient(String email) {
+        if (!patientRepository.existsByEmail(email)) {
+            throw new BadRequestException("Пациента с email " + email + " не существует!");
+        }
+        patientRepository.deleteByEmail(email);
     }
 }

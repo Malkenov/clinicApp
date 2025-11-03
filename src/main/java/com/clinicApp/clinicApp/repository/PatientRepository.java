@@ -7,4 +7,8 @@ import java.util.Optional;
 
 public interface PatientRepository extends JpaRepository<Patient, Long> {
     Optional<Patient> findByLastName(String lastname);
+
+    void deleteByEmail(String email);
+
+    boolean existsByEmail(String email);
 }
