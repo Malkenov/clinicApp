@@ -1,6 +1,7 @@
 package com.clinicApp.clinicApp.mapper;
 
 import com.clinicApp.clinicApp.dto.request.DoctorRequestDto;
+import com.clinicApp.clinicApp.dto.response.DoctorResponseDto;
 import com.clinicApp.clinicApp.entity.Doctor;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,16 @@ public class DoctorMapper {
                 .lastName(dto.getLastName())
                 .specialization(dto.getSpecialization())
                 .experienceYears(dto.getExperienceYears())
+                .build();
+    }
+
+    public static DoctorResponseDto toDto(Doctor doctor){
+        return DoctorResponseDto.builder()
+                .email(doctor.getEmail())
+                .firstName(doctor.getFirstName())
+                .lastName(doctor.getLastName())
+                .specialization(doctor.getSpecialization())
+                .experienceYears(doctor.getExperienceYears())
                 .build();
     }
 }

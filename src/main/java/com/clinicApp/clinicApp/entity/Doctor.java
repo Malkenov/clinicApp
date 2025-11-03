@@ -32,7 +32,7 @@ public class Doctor {
     private String specialization;
 
     @Column(name = "стаж")
-    private int experienceYears;
+    private Integer experienceYears;
 
     @Column
     private String email;

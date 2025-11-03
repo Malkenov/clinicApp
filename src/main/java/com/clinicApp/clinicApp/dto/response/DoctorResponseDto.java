@@ -1,8 +1,5 @@
 package com.clinicApp.clinicApp.dto.response;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -10,11 +7,12 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class DoctorResponseDto {
 
     private String firstName;
     private String lastName;
-    private String description;
+    private String specialization;
     private int experienceYears;
     private String email;
     private List<AppointmentResponseDto> appointment;
