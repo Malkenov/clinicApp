@@ -20,7 +20,7 @@ public class DoctorRequestDto {
     private String lastName;
 
     @NotBlank(message = "специальность обязательно!")
-    private String specialization;
+    private String specializationName;
 
     @NotNull(message = "стаж обязательно!")
     private int experienceYears;

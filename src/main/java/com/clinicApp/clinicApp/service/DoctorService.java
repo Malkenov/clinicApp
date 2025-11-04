@@ -7,8 +7,8 @@ import com.clinicApp.clinicApp.entity.Specialization;
 import com.clinicApp.clinicApp.exception.BadRequestException;
 import com.clinicApp.clinicApp.exception.NotFoundException;
 import com.clinicApp.clinicApp.mapper.DoctorMapper;
-import com.clinicApp.clinicApp.mapper.PatientMapper;
 import com.clinicApp.clinicApp.repository.DoctorRepository;
+import com.clinicApp.clinicApp.repository.SpecializationRepository;
 import com.clinicApp.clinicApp.utils.BeanUtilsHelper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -21,10 +21,14 @@ import java.util.List;
 public class DoctorService {
 
     private final DoctorRepository doctorRepository;
+    private final SpecializationRepository specializationRepository;
+
 
 
     public DoctorResponseDto postDoctor(DoctorRequestDto dto){
-        Doctor doctor = DoctorMapper.toEntity(dto);
+        Specialization specialization = specializationRepository.findByName(dto.getSpecializationName())
+                .orElseThrow(() -> new BadRequestException("Введенные данные не существует!"));
+        Doctor doctor = DoctorMapper.toEntity(dto,specialization);
         doctorRepository.save(doctor);
         return DoctorMapper.toDto(doctor);
     }

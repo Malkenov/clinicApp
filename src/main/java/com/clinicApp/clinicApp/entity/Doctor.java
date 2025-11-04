@@ -28,9 +28,6 @@ public class Doctor {
     @Column(name = "фамилия")
     private String lastName;
 
-    @Column(name = "специальность")
-    private String specialization;
-
     @Column(name = "стаж")
     private Integer experienceYears;
 

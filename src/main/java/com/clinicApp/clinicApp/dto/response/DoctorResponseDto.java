@@ -12,7 +12,7 @@ public class DoctorResponseDto {
 
     private String firstName;
     private String lastName;
-    private String specialization;
+    private String specializations;
     private int experienceYears;
     private String email;
     private List<AppointmentResponseDto> appointment;
