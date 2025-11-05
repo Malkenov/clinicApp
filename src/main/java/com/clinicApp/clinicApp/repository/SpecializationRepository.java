@@ -7,4 +7,8 @@ import java.util.Optional;
 
 public interface SpecializationRepository extends JpaRepository<Specialization, Long> {
     Optional<Specialization> findByName(String message);
+
+    boolean exists(String name);
+
+    void deleteByName(String name);
 }

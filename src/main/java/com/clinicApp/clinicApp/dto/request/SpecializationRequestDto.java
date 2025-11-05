@@ -17,6 +17,6 @@ public class SpecializationRequestDto {
     @NotBlank(message = "Краткое описание специалиста")
     private String description;
 
-    @NotNull
+    @NotBlank
     private String doctor;
 }
