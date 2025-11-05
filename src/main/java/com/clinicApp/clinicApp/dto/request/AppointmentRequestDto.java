@@ -16,7 +16,7 @@ public class AppointmentRequestDto {
     @NotNull(message = "Введите к какому врачу хотите записаться!")
     private Long doctorId;
 
-    @NotNull(message = "Введите данные пациенита!")
+    @NotNull(message = "Введите данные пациента!")
     private Long patientId;
 
     @NotNull

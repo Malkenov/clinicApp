@@ -57,5 +57,6 @@ public class DoctorService {
         if(!doctorRepository.existsByEmail(email)){
             throw new NotFoundException("Доктор по email " + email + " не найден!");
         }
+        doctorRepository.deleteByEmail(email);
     }
 }
