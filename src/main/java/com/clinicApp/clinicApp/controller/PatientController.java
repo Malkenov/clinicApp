@@ -6,10 +6,11 @@ import com.clinicApp.clinicApp.service.PatientService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.RequestToViewNameTranslator;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Controller
@@ -18,19 +19,38 @@ public class PatientController {
 
     private final PatientService patientService;
 
+    private final RequestToViewNameTranslator requestToViewNameTranslator;
+
     @PostMapping
     public ResponseEntity<PatientResponseDto> postPatient(@RequestBody PatientRequestDto dto){
-        PatientResponseDto patientResponseDto = patientService.postPatient(dto);
-        return ResponseEntity.ok(patientResponseDto);
+        return ResponseEntity.ok(patientService.postPatient(dto));
     }
 
     @PostMapping
     public ResponseEntity<PatientResponseDto> postAppointmentPatient(
-            @RequestBody PatientRequestDto dto,
+            @RequestBody @Validated PatientRequestDto dto,
             @PathVariable Long id){
-        PatientResponseDto patientResponseDto = patientService.postPatientAppointment(dto, id);
-        return ResponseEntity.ok(patientResponseDto);
+        return ResponseEntity.ok(patientService.postPatientAppointment(dto, id));
     }
 
+    @GetMapping
+    public ResponseEntity<List<PatientResponseDto>> getAllPatient(){
+        return ResponseEntity.ok(patientService.getByAll());
+    }
 
+    @GetMapping
+    public ResponseEntity<PatientResponseDto> getByLastName(@RequestBody @Validated PatientRequestDto dto){
+        return ResponseEntity.ok(patientService.getByLastName(dto));
+    }
+
+    @PatchMapping
+    public ResponseEntity<PatientResponseDto> patchPatient(@RequestBody @Validated PatientRequestDto dto){
+        return ResponseEntity.ok(patientService.updatePatient(dto));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> removePatient(String email){
+        patientService.removePatient(email);
+        return ResponseEntity.noContent().build();
+    }
 }
