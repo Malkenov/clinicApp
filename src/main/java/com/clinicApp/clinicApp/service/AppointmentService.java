@@ -9,9 +9,11 @@ import com.clinicApp.clinicApp.mapper.DoctorMapper;
 import com.clinicApp.clinicApp.repository.AppointmentRepository;
 import com.clinicApp.clinicApp.utils.BeanUtilsHelper;
 import lombok.AllArgsConstructor;
+import org.hibernate.annotations.ColumnTransformers;
 import org.springframework.beans.BeanUtils;
 import org.springframework.boot.availability.ApplicationAvailabilityBean;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class AppointmentService {
         return AppointmentMapper.toDto(appointment);
     }
 
+    @Transactional
     public AppointmentResponseDto update(AppointmentRequestDto dto,Long id){
         Appointment appointment = appointmentRepository.findById(id)
                 .orElseThrow(()-> new NotFoundException("Запись не найдена!"));

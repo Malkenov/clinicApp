@@ -13,6 +13,7 @@ import com.clinicApp.clinicApp.utils.BeanUtilsHelper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class DoctorService {
 
 
 
+    @Transactional
     public DoctorResponseDto postDoctor(DoctorRequestDto dto){
         Specialization specialization = specializationRepository.findByName(dto.getSpecializationName())
                 .orElseThrow(() -> new BadRequestException("Введенные данные не существует!"));
@@ -45,6 +47,7 @@ public class DoctorService {
         return DoctorMapper.toDto(doctor);
     }
 
+    @Transactional
     public DoctorResponseDto updateDoctor(DoctorRequestDto dto){
         Doctor doctor = doctorRepository.findByLastName(dto.getLastName())
                 .orElseThrow(() -> new BadRequestException("Доктор по фамилии " + dto.getLastName() + " не найден!"));
@@ -53,6 +56,7 @@ public class DoctorService {
         return DoctorMapper.toDto(doctor);
     }
 
+    @Transactional
     public void removeDoctor(String email){
         if(!doctorRepository.existsByEmail(email)){
             throw new NotFoundException("Доктор по email " + email + " не найден!");

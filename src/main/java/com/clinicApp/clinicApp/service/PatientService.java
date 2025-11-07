@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class PatientService {
     private final AppointmentRepository appointmentRepository;
 
 
+    @Transactional
     public PatientResponseDto postPatientAppointment(PatientRequestDto dto, Long id) {
         Patient patient = PatientMapper.toEntity(dto);
 
@@ -49,6 +51,7 @@ public class PatientService {
     }
 
 
+    @Transactional
     public PatientResponseDto postPatient(PatientRequestDto dto) {
         Patient patient = PatientMapper.toEntity(dto);
         patientRepository.save(patient);
@@ -68,6 +71,7 @@ public class PatientService {
         return PatientMapper.toDto(patient);
     }
 
+    @Transactional
     public PatientResponseDto updatePatient(PatientRequestDto dto) {
         Patient patient = patientRepository.findByLastName(dto.getLastName())
                 .orElseThrow(() -> new BadRequestException("Пациент с фамилией " + dto.getLastName() + " не найден!"));
@@ -77,6 +81,7 @@ public class PatientService {
         return PatientMapper.toDto(patient);
     }
 
+    @Transactional
     public void removePatient(String email) {
         if (!patientRepository.existsByEmail(email)) {
             throw new BadRequestException("Пациента с email " + email + " не существует!");

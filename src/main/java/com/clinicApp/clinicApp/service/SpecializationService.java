@@ -9,6 +9,7 @@ import com.clinicApp.clinicApp.repository.SpecializationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class SpecializationService {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    @Transactional
     public SpecializationResponseDto postSpecialization(SpecializationRequestDto dto){
         Specialization specialization = SpecializationMapper.toEntity(dto);
         specializationRepository.save(specialization);
@@ -38,6 +40,7 @@ public class SpecializationService {
         return SpecializationMapper.toDto(specialization);
     }
 
+    @Transactional
     public void removeSpecialization(String name){
         if(!specializationRepository.exists(name)){
             throw new NotFoundException("Ничего не найдено!");
