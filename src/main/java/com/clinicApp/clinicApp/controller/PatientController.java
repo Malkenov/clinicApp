@@ -13,7 +13,7 @@ import org.springframework.web.servlet.RequestToViewNameTranslator;
 import java.util.List;
 
 @AllArgsConstructor
-@Controller
+@RestController
 @RequestMapping("/patients")
 public class PatientController {
 
