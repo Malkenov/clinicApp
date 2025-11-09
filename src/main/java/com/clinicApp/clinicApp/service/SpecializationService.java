@@ -19,8 +19,6 @@ public class SpecializationService {
 
     private final SpecializationRepository specializationRepository;
 
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
     @Transactional
     public SpecializationResponseDto postSpecialization(SpecializationRequestDto dto){
         Specialization specialization = SpecializationMapper.toEntity(dto);

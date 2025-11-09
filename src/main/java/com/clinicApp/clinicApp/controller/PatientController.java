@@ -22,7 +22,7 @@ public class PatientController {
     private final RequestToViewNameTranslator requestToViewNameTranslator;
 
     @PostMapping
-    public ResponseEntity<PatientResponseDto> postPatient(@RequestBody PatientRequestDto dto){
+    public ResponseEntity<PatientResponseDto> postPatient(@RequestBody @Validated PatientRequestDto dto){
         return ResponseEntity.ok(patientService.postPatient(dto));
     }
 
