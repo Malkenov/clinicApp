@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class DoctorMapper {
 
-    public static Doctor toEntity(DoctorRequestDto dto, Specialization specializations){
+    public static Doctor toEntity(DoctorRequestDto dto, Specialization specialization){
         return Doctor.builder()
                 .email(dto.getEmail())
                 .firstName(dto.getFirstname())
                 .lastName(dto.getLastName())
-                .specializations(specializations)
+                .specialization(specialization)
                 .experienceYears(dto.getExperienceYears())
                 .build();
     }
@@ -24,7 +24,7 @@ public class DoctorMapper {
                 .email(doctor.getEmail())
                 .firstName(doctor.getFirstName())
                 .lastName(doctor.getLastName())
-                .specializations(doctor.getSpecializations().getName())
+                .specializations(doctor.getSpecialization().getName())
                 .experienceYears(doctor.getExperienceYears())
                 .build();
     }

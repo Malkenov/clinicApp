@@ -26,7 +26,7 @@ public class PatientController {
         return ResponseEntity.ok(patientService.postPatient(dto));
     }
 
-    @PostMapping
+    @PostMapping("/appointments")
     public ResponseEntity<PatientResponseDto> postAppointmentPatient(
             @RequestBody @Validated PatientRequestDto dto,
             @PathVariable Long id){
@@ -38,9 +38,9 @@ public class PatientController {
         return ResponseEntity.ok(patientService.getByAll());
     }
 
-    @GetMapping
-    public ResponseEntity<PatientResponseDto> getByLastName(@RequestBody @Validated PatientRequestDto dto){
-        return ResponseEntity.ok(patientService.getByLastName(dto));
+    @GetMapping("/{lastName}")
+    public ResponseEntity<PatientResponseDto> getByLastName(@PathVariable String lastName){
+        return ResponseEntity.ok(patientService.getByLastName(lastName));
     }
 
     @PatchMapping

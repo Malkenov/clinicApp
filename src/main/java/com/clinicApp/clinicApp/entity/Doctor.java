@@ -39,7 +39,7 @@ public class Doctor {
     private List<Appointment> appointmentList;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Specialization specializations;
+    private Specialization specialization;
 
     @Override
     public boolean equals(Object o) {

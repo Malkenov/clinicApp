@@ -65,9 +65,9 @@ public class PatientService {
                 .toList();
     }
 
-    public PatientResponseDto getByLastName(PatientRequestDto dto) {
-        Patient patient = patientRepository.findByLastName(dto.getLastName())
-                .orElseThrow(() -> new BadRequestException("Пациент с фамилией " + dto.getLastName() + " не найден!"));
+    public PatientResponseDto getByLastName(String lastName) {
+        Patient patient = patientRepository.findByLastName(lastName)
+                .orElseThrow(() -> new BadRequestException("Пациент с фамилией " + lastName + " не найден!"));
         return PatientMapper.toDto(patient);
     }
 
