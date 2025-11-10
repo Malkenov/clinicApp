@@ -40,7 +40,7 @@ public class SpecializationService {
 
     @Transactional
     public void removeSpecialization(String name){
-        if(!specializationRepository.exists(name)){
+        if(!specializationRepository.existsByName(name)){
             throw new NotFoundException("Ничего не найдено!");
         }
         specializationRepository.deleteByName(name);

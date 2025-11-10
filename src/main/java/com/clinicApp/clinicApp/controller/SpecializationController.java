@@ -13,6 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Controller
+@RequestMapping("/specializations")
 public class SpecializationController {
 
     private final SpecializationService specializationService;

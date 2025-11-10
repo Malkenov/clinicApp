@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # 1️⃣ Контейнер с приложением
+  app:
+    build: .
+    container_name: clinicApp
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/clinic_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      - db
+
+  # 2️⃣ Контейнер с базой данных
+  db:
+    image: postgres:15
+    container_name: clinic_db
+    environment:
+      POSTGRES_DB: clinicApp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+

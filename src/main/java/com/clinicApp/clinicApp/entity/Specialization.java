@@ -26,7 +26,7 @@ public class Specialization {
     @Column(name = "описание")
     private String description;
 
-    @OneToMany(mappedBy = "specializations")
+    @OneToMany(mappedBy = "specialization")
     @JsonIgnore
     private List<Doctor> doctors;
 
