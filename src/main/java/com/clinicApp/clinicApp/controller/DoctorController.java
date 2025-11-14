@@ -38,7 +38,7 @@ public class DoctorController {
     }
 
     @PatchMapping
-    public ResponseEntity<DoctorResponseDto> patchDoctor(@RequestBody @Validated DoctorRequestDto dto){
+    public ResponseEntity<DoctorResponseDto> patchDoctor(@RequestBody DoctorRequestDto dto){
         return ResponseEntity.ok(doctorService.updateDoctor(dto));
     }
 
